@@ -7,11 +7,11 @@ and it will show you the definitions of the word, it's synonyms, examples in a s
 ## Installation
 
 ```
-git clone https://github.com/krivke/dictionary.git
+git clone https://github.com/dinok3/dictionary.git
 cd dictionary
 pip install -r requirements.txt
 py manage.py migrate
 py manage.py runserver
 ```
 
-![Brief look](https://github.com/krivke/dictionary/tree/master/main/static/images)
+![Brief look](https://github.com/dinok3/dictionary/tree/master/main/static/images)
