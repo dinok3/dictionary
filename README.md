@@ -14,4 +14,4 @@ py manage.py migrate
 py manage.py runserver
 ```
 
-![Brief look](https://github.com/krivke/dictionary/main/static/images)
+![Brief look](https://github.com/krivke/dictionary/tree/master/main/static/images)
