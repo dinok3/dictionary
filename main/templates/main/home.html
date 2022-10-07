@@ -1,0 +1,64 @@
+{%extends 'main/base.html'%}
+
+{%block content%}
+<div class="container d-flex justify-content-center flex-column mt-5">
+    <h1 class="title">Search for a word in a dictionary</h1>
+    
+    <form method="GET" class="mt-5">
+        <div class="mx-auto d-flex">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name="word">
+            <button type="submit" class="btn btn-custom ms-2">Search</button>
+          </div>
+    </form>
+</div>
+<div class="container">
+<h3 class="sub-heading">What will you learn...</h3>
+</div>
+
+<div class="container cards">
+<div class="row">
+  <div class="col">
+        <div class="card">
+          <i class="fas fa-clone synonym-icon"></i>
+          <div class="card-body">
+              <h5 class="card-title synonym-title">Synonyms</h5>
+              <p class="card-text">You will be given a few more words that have similar meaning as your word</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <i class="fa fa-book use-case-icon"></i>
+          <div class="card-body">
+              <h5 class="card-title use-case-title">Use case</h5>
+              <p class="card-text">You will find examples of how you should use your word in real life </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <i class="fas fa-globe origin-icon"></i>
+          <div class="card-body">
+              <h5 class="card-title origin-title">Origin</h5>
+              <p class="card-text">You will learn how your word was invented and put into English dictionary</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card">
+          <i class="fas fa-volume-up sound-icon"></i>
+          <div class="card-body">
+              <h5 class="card-title sound-title">Sound</h5>
+              <p class="card-text">You will also have audio sound so you can check out how to pronounce your word</p>
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+<div class="container">
+    <h3 class="sub-heading-last">and much more...</h3>
+    </div>
+{%endblock%}

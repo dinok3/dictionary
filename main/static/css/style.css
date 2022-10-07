@@ -1,0 +1,194 @@
+html{
+    position: relative;
+}
+body{
+    min-height: 950px;
+}
+/*NAVBAR*/
+.navbar-brand{
+    color:#264653 !important;
+}
+
+
+/*FORM*/
+.title{
+    text-align: center;
+}
+form div{
+    width: 80%;
+}
+.btn-custom{
+    background-color: #2A9D8F;
+    color:white;
+    border:0;
+}
+.btn-custom:hover{
+    color:white;
+}
+
+/*CARDS*/
+
+.card i{
+    font-size: 5rem;
+    text-align: center;
+    margin-top: 1rem;
+    
+}
+.synonym-title{
+    color:#E76F51;
+}
+.synonym-icon{
+    color:#E76F51;
+}
+
+.use-case-title{
+    color:#E9C46A;
+}
+.use-case-icon{
+    color:#E9C46A;
+}
+
+.origin-icon{
+    color:#2A9D8F;
+}
+.origin-title{
+    color:#2A9D8F;
+}
+
+.sound-title{
+    color:#264653;
+}
+.sound-icon{
+    color:#264653;
+}
+.card-body{
+    min-height: 150px;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+.sub-heading{
+    margin-top: 200px;
+    margin-bottom: 50px;
+    color:#2A9D8F;
+    font-weight: bold;
+}
+.sub-heading-last{
+    margin-top: 50px;
+   
+    color:#2A9D8F;
+    font-weight: bold;
+    text-align: end;
+    margin-bottom: 100px;
+}
+.title{
+    font-weight: bold;
+    color:#264653;
+}
+
+.footer{
+    display: flex;
+    justify-content: center;
+    background-color: #264653;
+    color:white;
+    align-items: center;
+    height: 40px;
+    margin-top: auto;
+    width: 100%;;
+}
+
+.footer p{
+    margin:0;
+}
+/*SEARCH STUFF*/
+.breadcrumb-item{
+    display: flex;
+    align-items: center;
+}
+.audio,audio{
+    display: none;
+}
+.audio-show{
+    display: block;
+}
+.card-search{
+    margin-bottom: 0;
+}
+a{
+    text-decoration: none;
+}
+p{
+    margin:0;
+}
+.definitions-p{
+    margin-bottom: 10px;
+}
+strong{
+    color:#264653;
+}
+.synonyms-span{
+    color:#2A9D8F;
+    font-weight: bold;
+}
+.examples-span{
+    font-weight: bold;
+    color:#E76F51;
+}
+.history-p,.forms-p{
+    color:#264653;
+    font-weight: bold;
+    cursor: pointer;
+    display: block;
+    width: 350px;
+    margin-left: 5px;
+}
+.etymologies{
+    display: none;
+}
+.sense-div{
+    margin-bottom: 10px;
+}
+.round-span{
+    border:1px solid rgba(0,0,0,.125);
+    padding: 0 4px;
+    font-size: 0.95rem;
+    margin: 0 3px;
+    color:black;
+    
+}
+.inner-div{
+    margin-left: 20px;
+}
+.more-definitions,.less-definitions{
+    text-align: center;
+    cursor: pointer;
+    margin:0 auto;
+    width: 250px;
+}
+
+
+
+.arrow-cls{
+    font-size: 1rem !important;
+    margin-bottom: 3rem;
+}
+.less-definitions{
+    display: none;
+}
+.all-senses{
+    display: none;
+}
+.gramar{
+    color:#2A9D8F;
+    font-weight: bold;
+}
+.forms-ul{
+    display: none;
+}
+@media (max-width:991px){
+    
+}

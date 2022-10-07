@@ -1,0 +1,296 @@
+{%extends 'main/base.html'%}
+
+{%block content%}
+<div class="container">
+    {%for result in response.results%}
+   
+
+         
+        {%for lexical_entrie in result.lexicalEntries%}
+            <div class="card mb-2 mt-2">
+                <div  class="card-body">
+       
+
+                    <!--ENTRIE-->
+                    {%for entrie in lexical_entrie.entries%}
+                        <!--SPELLING-->
+                        {%if entrie.pronunciations%}
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item card-subtitle ">
+                                    <h5 class="card-title card-search">
+                                        {{lexical_entrie.lexicalCategory.id}} 
+                                        
+                                    </h5>
+                                </li>
+                              <li class="breadcrumb-item card-subtitle text-muted">{{entrie.pronunciations.1.phoneticSpelling}}</li>
+                              <li class="breadcrumb-item audio-item card-subtitle  card-link" style="color:#0a58ca;cursor:pointer;">audio link</li>
+                            </ol>
+                        </nav>
+                            
+                        <audio controls class="mb-2 audio">
+                            <source src="{{entrie.pronunciations.1.audioFile}}" type="audio/ogg">
+                            <source src="{{entrie.pronunciations.1.audioFile}}" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        {%else%}
+                        <h5 class="card-title card-search">{{lexical_entrie.lexicalCategory.id}}</h5>
+                        {%endif%}
+                        
+                        
+                        <div class="inner-div"> 
+                          <!--SENSES-->
+                            <div class="sliced-senses">
+                              {%for sense in entrie.senses|slice:":2"%}
+                              <div class="mb-5"> 
+                                  <!-- definition-->
+                                  {%if sense.definitions%}
+                                  <p class="definitions-p"><strong>{{forloop.counter}}. definition: </strong>{{sense.definitions.0}}</p>
+                                  {%endif%}
+                                  <div class="inner-div">                
+                                    <!-- syonyms-->
+                                    {%if sense.synonyms%}
+                                    <span class="synonyms-span">Similar words: </span>
+                                    {%for synonym in sense.synonyms|slice:":10"%}
+
+                                        <a href="{%url 'search' synonym.text%}"><span class="round-span">{{synonym.text}}</span></a>
+                                    {%endfor%}
+                                    {%endif%}
+                                  
+                                    {%if sense.examples%}
+                                    <div class="examples-div">
+                                    <span class="examples-span">Examples: </span>
+                                      <!-- examples-->
+                                      <div class="inner-div">                                   
+                                        {%for example in sense.examples%}
+                                            <p>{{forloop.counter}}. {{example.text}}</p>
+                                        {%endfor%}
+                                      </div>
+                                    </div>
+                                    {%endif%}
+                                  </div>
+                                </div>
+                              {%endfor%}                              
+                            </div>
+
+                            <div class="all-senses">
+                              {%for sense in entrie.senses%}
+                              <div class="mb-5"> 
+                                  <!-- definition-->
+                                  {%if sense.definitions%}
+                                  <p class="definitions-p"><strong>{{forloop.counter}}. definition: </strong>{{sense.definitions.0}}</p>
+                                  {%endif%}
+
+                                  <div class="inner-div">                
+                                    <!-- syonyms-->
+                                    {%if sense.synonyms%}
+                                    <span class="synonyms-span">Similar words: </span>
+                                    {%for synonym in sense.synonyms|slice:":10"%}
+
+                                        <a href="{%url 'search' synonym.text%}"><span class="round-span">{{synonym.text}}</span></a>
+                                    {%endfor%}
+                                    {%endif%}
+                                    
+                                    {%if sense.examples%}
+                                    <div class="examples-div">
+                                    <span class="examples-span">Examples: </span>
+                                      <!-- examples-->
+                                      <div class="inner-div">                                   
+                                        {%for example in sense.examples%}
+                                            <p>{{forloop.counter}}. {{example.text}}</p>
+                                        {%endfor%}
+                                      </div>
+                                    </div>
+                                    {%endif%}
+
+                                  </div>
+                                </div>
+                              {%endfor%}                              
+                            </div>
+                           
+                            {%if entrie.senses|length > 2%}
+                            
+                            <p class="more-definitions">See more definitions... <i class="fas fa-arrow-circle-down arrow-cls"></i></p>
+                            <p class="less-definitions">See less definitions... <i class="fas fa-arrow-circle-up arrow-cls"></i></p>
+                            {%else%}
+                            <p class="more-definitions" style="display: none;">See more definitions... <i class="fas fa-arrow-circle-down arrow-cls"></i></p>
+                            <p class="less-definitions">See less definitions... <i class="fas fa-arrow-circle-up arrow-cls"></i></p>
+                            {%endif%}
+                          <!--HISTORY OF A WORD-->
+                          
+                          {%if entrie.etymologies%}
+                            <span class="history-p"><i class="fas fa-history" style="font-size: inherit;color:#E76F51;"></i> click to see history of a word(etymology)</span>
+                            <div class="inner-div etymologies mb-2">                           
+                              {{entrie.etymologies.0}}
+                            </div>
+                          {%endif%}
+                          <!--FORMS-->
+                          {%if entrie.inflections%}
+                            
+                            <span class="forms-p"><i class='fas fa-info' style='font-size:inherit;color:#2A9D8F; margin-left: 5px;'></i> click to see different forms of a word</span>
+                            <ul class="forms-ul">  
+
+                              {%for inf in entrie.inflections%}
+                              {%if inf.grammaticalFeatures.0.text %}
+                              <li><span class="gramar">{{inf.grammaticalFeatures.0.text}}</span> {{inf.inflectedForm}}</li>
+                              {%else%}
+                              <li>{{inf.inflectedForm}}</li>
+                              {%endif%}
+                              {%endfor%}
+                            </ul>
+                              
+                              
+                          {%endif%}
+                         
+                          
+                      </div>
+                    {%endfor%}
+                    <!--PHRASES,PHRASAL VERBS-->
+                    <!--TODO: moras promjenit id-eve da svaka bude za sebe collapseOne->collapse-now  -->
+                    <div class="accordion" id="accordionExample" style="margin:50px 0;">
+                        {% if lexical_entrie.phrases%}
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="heading-now">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{forloop.counter}}" aria-expanded="true" aria-controls="collapse{{forloop.counter}}">
+                              Phrases
+                            </button>
+                          </h2>
+                          <div id="collapse{{forloop.counter}}" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {%for phrase in lexical_entrie.phrases%}
+                                    {{phrase.text}},
+                                {%endfor%}
+                        
+                            </div>
+                          </div>
+                        </div>
+                        {%endif%}
+                        <!--PHRASHAL VERBS-->
+                        {% if lexical_entrie.phrasalVerbs %}
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                              Phrasal Verbs
+                            </button>
+                          </h2>
+                          <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                {%for phrasal in lexical_entrie.phrasalVerbs%}
+                                    {{phrasal.text}},
+                                {%endfor%}
+                            </div>
+                          </div>
+                        </div>
+                        {%endif%}
+                        
+                      </div>
+                    
+                    
+
+                    
+                </div>
+            </div>
+        {%endfor%}
+
+        
+    {%endfor%}
+</div>
+
+<script>
+    /*SHOWS AUDIO ON CLICK*/
+    var audio_links = document.querySelectorAll(".audio-item");
+    var audios = document.querySelectorAll(".audio")
+    for(let i=0;i<audio_links.length;i++){
+        
+    
+        audio_links[i].addEventListener("click",function(e){
+            e.preventDefault();
+            audios[i].classList.toggle("audio-show")
+
+        })
+    }
+
+
+    /*MORE DEFINITIONS*/
+    var p_tags = document.querySelectorAll(".more-definitions");
+    var p_tags_less = document.querySelectorAll(".less-definitions");
+   
+    var sliced = document.querySelectorAll(".sliced-senses")
+    var all = document.querySelectorAll(".all-senses")
+    
+    
+    for(let i =0;i<p_tags.length;i++){
+      p_tags[i].addEventListener("click",function(e){
+        /*SHOW MORE*/
+        if(sliced[i].style.display != "none"){
+          sliced[i].style.display = "none";
+          all[i].style.display = "block";
+          p_tags[i].style.display = "none";
+          p_tags_less[i].style.display = "block"
+       
+        }else{
+          /*SHOW LESS*/
+          sliced[i].style.display = "block";
+          all[i].style.display = "none";
+          p_tags[i].style.display = "block";
+          p_tags_less[i].style.display = "none"
+        }
+        
+      })
+
+      p_tags_less[i].addEventListener("click",function(e){
+        /*SHOW MORE*/
+        if(sliced[i].style.display != "none"){
+          sliced[i].style.display = "none";
+          all[i].style.display = "block";
+          p_tags[i].style.display = "none";
+          p_tags_less[i].style.display = "block"
+       
+        }else{
+          /*SHOW LESS*/
+          sliced[i].style.display = "block";
+          all[i].style.display = "none";
+          p_tags[i].style.display = "block";
+          p_tags_less[i].style.display = "none"
+        }
+        
+      })
+
+    }
+    
+
+    /*SHOW HISTORY OF A WORD*/
+    var ps = document.querySelectorAll(".history-p")
+    var etyms = document.querySelectorAll(".etymologies")
+    for(let i= 0;i<ps.length;i++){
+      ps[i].addEventListener("click",function(e){
+        if(etyms[i].style.display != "block"){
+          etyms[i].style.display = "block";
+          ps[i].innerHTML = "<i class='fas fa-history' style='font-size: inherit;color:#E76F51;''></i> click to hide history of a word(etymology)"
+        }else{
+          etyms[i].style.display = "none";
+          ps[i].innerHTML = "<i class='fas fa-history' style='font-size: inherit;color:#E76F51;''></i> click to see history of a word(etymology)"
+        }
+      })
+    }
+
+
+    /*SHOW FORMS OF A WORD*/
+    var form_ps = document.querySelectorAll(".forms-p")
+    var forms = document.querySelectorAll(".forms-ul")
+    for(let i= 0;i<form_ps.length;i++){
+      form_ps[i].addEventListener("click",function(e){
+        if(forms[i].style.display != "block"){
+          forms[i].style.display = "block";
+          form_ps[i].innerHTML = "<i class='fas fa-info' style='font-size:inherit;color:#2A9D8F; margin-left: 5px;'></i> click to hide different forms of a word"
+        }else{
+          forms[i].style.display = "none";
+          form_ps[i].innerHTML = "<i class='fas fa-info' style='font-size:inherit;color:#2A9D8F; margin-left: 5px;'></i> click to see different forms of the word"
+        }
+      })
+    }
+
+</script>
+
+{%endblock%}
+
